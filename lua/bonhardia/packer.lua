@@ -79,4 +79,8 @@ return require('packer').startup(function(use)
             require('crates').setup()
         end,
     }
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end }
+    use { "lewis6991/gitsigns.nvim" }
 end)
