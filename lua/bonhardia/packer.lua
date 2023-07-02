@@ -77,10 +77,9 @@ return require('packer').startup(function(use)
         requires = { 'nvim-lua/plenary.nvim' },
         config = function()
             require('crates').setup()
+            vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         end,
     }
-    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
-    end }
+    use { "akinsho/toggleterm.nvim", tag = '*' }
     use { "lewis6991/gitsigns.nvim" }
 end)

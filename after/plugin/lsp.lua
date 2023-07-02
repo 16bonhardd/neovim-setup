@@ -7,12 +7,9 @@ lsp.ensure_installed({
     'lua_ls',
     'jdtls',
 })
--- needed for nvim-jdtls
-lsp.skip_server_setup({ 'jdtls' })
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
-
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -49,7 +46,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("i", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "<S-F6>", function() vim.lsp.buf.rename() end, opts)
+    -- vim.keymap.set("n", "<S-F6>", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
@@ -60,14 +57,16 @@ lsp.format_on_save({
     },
     servers = {
         ['lua_ls'] = { 'lua' },
-        ['rust_analyzer'] = { 'rust' },
         ['nvim-jdtls'] = { 'java' },
+        ['rust-analyzer'] = { 'rust' },
         -- if you have a working setup with null-ls
         -- you can specify filetypes it can format.
         -- ['null-ls'] = {'javascript', 'typescript'},
     }
 })
 
+-- needed for nvim-jdtls
+lsp.skip_server_setup({ 'jdtls' })
 lsp.setup()
 local cmp_action = require('lsp-zero').cmp_action()
 
@@ -78,6 +77,9 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'crates' },
+        { name = 'path' },
+        { name = 'buffer',  keyword_length = 3 },
+        { name = 'luasnip', keyword_length = 2 },
     },
     mapping = {
         ['<C-f>'] = cmp_action.luasnip_jump_forward(),
