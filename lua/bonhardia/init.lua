@@ -2,7 +2,7 @@ require("bonhardia.remap")
 require("bonhardia.set")
 
 local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup('ThePrimeagen', {})
+local BonhardiaGroup = augroup('Bonhardia', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -22,8 +22,8 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
+autocmd({ "BufWritePre" }, {
+    group = BonhardiaGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })

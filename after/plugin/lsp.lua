@@ -6,6 +6,7 @@ lsp.ensure_installed({
     'rust_analyzer',
     'lua_ls',
     'jdtls',
+    'clangd',
 })
 
 -- Fix Undefined global 'vim'
@@ -46,7 +47,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("i", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<A-CR>", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-    -- vim.keymap.set("n", "<S-F6>", function() vim.lsp.buf.rename() end, opts)
+    vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
@@ -59,9 +60,7 @@ lsp.format_on_save({
         ['lua_ls'] = { 'lua' },
         ['nvim-jdtls'] = { 'java' },
         ['rust-analyzer'] = { 'rust' },
-        -- if you have a working setup with null-ls
-        -- you can specify filetypes it can format.
-        -- ['null-ls'] = {'javascript', 'typescript'},
+        ['clangd'] = { 'cpp' },
     }
 })
 
@@ -77,6 +76,7 @@ cmp.setup({
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'crates' },
+        { name = 'clangd' },
         { name = 'path' },
         { name = 'buffer',  keyword_length = 3 },
         { name = 'luasnip', keyword_length = 2 },
