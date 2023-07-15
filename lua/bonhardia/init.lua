@@ -1,6 +1,9 @@
 require("bonhardia.remap")
 require("bonhardia.set")
 
+vim.cmd 'colorscheme darcula-solid'
+vim.cmd 'set termguicolors'
+
 local augroup = vim.api.nvim_create_augroup
 local BonhardiaGroup = augroup('Bonhardia', {})
 

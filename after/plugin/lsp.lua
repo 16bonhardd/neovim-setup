@@ -59,9 +59,16 @@ lsp.format_on_save({
     servers = {
         ['lua_ls'] = { 'lua' },
         ['nvim-jdtls'] = { 'java' },
-        ['rust-analyzer'] = { 'rust' },
-        ['clangd'] = { 'cpp' },
+        ['rust-analyzer'] = { 'rs' },
+        ['clangd'] = { 'cpp', 'c' },
     }
+})
+
+-- fixes semantic highlighting conflicts
+lsp.set_server_config({
+    on_init = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+    end,
 })
 
 -- needed for nvim-jdtls
@@ -73,11 +80,8 @@ require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
     sources = {
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'crates' },
-        { name = 'clangd' },
         { name = 'path' },
+        { name = 'nvim_lsp' },
         { name = 'buffer',  keyword_length = 3 },
         { name = 'luasnip', keyword_length = 2 },
     },

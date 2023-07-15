@@ -9,24 +9,25 @@ return require('packer').startup(function(use)
 
     use {
         -- This file can be loaded by calling `lua require('plugins')` from your init.vim
-        'nvim-telescope/telescope.nvim', tag = '0.1.2',
-        -- or                            , branch = '0.1.x',
+        'nvim-telescope/telescope.nvim', tag = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use { 'doums/darcula' }
-
-    use({
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {
-                icons = false,
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                -- refer to the configuration section below
-            }
-        end
-    })
+    -- use { 'Carcuis/darcula' }
+    -- use { 'kl4mm/darcula' }
+    -- use { 'doums/darcula' }
+    use { "16bonhardd/darcula.nvim", requires = "rktjmp/lush.nvim" }
+    -- use({
+    -- "folke/trouble.nvim",
+    -- config = function()
+    -- require("trouble").setup {
+    -- icons = false,
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    -- }
+    -- end
+    -- })
 
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -64,10 +65,8 @@ return require('packer').startup(function(use)
         }
     }
 
-    use("folke/zen-mode.nvim")
-    use("eandrju/cellular-automaton.nvim")
+    -- use("folke/zen-mode.nvim")
     use("terrortylor/nvim-comment")
-    use("laytan/cloak.nvim")
     use {
         'saecki/crates.nvim',
         tag = 'v0.3.0',
@@ -77,6 +76,6 @@ return require('packer').startup(function(use)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         end,
     }
-    use { "akinsho/toggleterm.nvim", tag = '*' }
+    -- use { "akinsho/toggleterm.nvim", tag = '*' }
     use { "lewis6991/gitsigns.nvim" }
 end)

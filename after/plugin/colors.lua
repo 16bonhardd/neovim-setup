@@ -1,2 +1,1 @@
-vim.cmd 'colorscheme darcula'
-vim.cmd 'set termguicolors'
+vim.cmd "set colorcolumn:"
