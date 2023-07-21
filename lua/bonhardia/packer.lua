@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
     -- use { 'kl4mm/darcula' }
     -- use { 'doums/darcula' }
     use { "16bonhardd/darcula.nvim", requires = "rktjmp/lush.nvim" }
+    use { "mg979/vim-visual-multi", tag = "master" }
     -- use({
     -- "folke/trouble.nvim",
     -- config = function()
