@@ -1,29 +1,45 @@
 local lsp = require("lsp-zero")
 
+require('mason').setup({})
+
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'rust_analyzer',
+        'lua_ls',
+        'jdtls',
+        'clangd',
+    },
+    handlers = {
+        lsp.default_setup,
+        jdtls = lsp.noop,
+        lua_ls = function()
+            local lua_opts = lsp.nvim_luaUls()
+            require('lspconfig').lua_ls.setup(lua_opts)
+        end,
+    }
+})
+
+
 lsp.preset("recommended")
 
-lsp.ensure_installed({
-    'rust_analyzer',
-    'lua_ls',
-    'jdtls',
-    'clangd',
-})
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ["<C-Space>"] = cmp.mapping.complete(),
+local cmp_format = lsp.cmp_format()
+
+cmp.setup({
+    formatting = cmp_format,
+    mapping = cmp.mapping.insert({
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ["<C-Space>"] = cmp.mapping.complete(),
+    }),
 })
 
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
@@ -72,13 +88,11 @@ lsp.set_server_config({
 })
 
 -- needed for nvim-jdtls
-lsp.skip_server_setup({ 'jdtls' })
-lsp.setup()
-local cmp_action = require('lsp-zero').cmp_action()
+local cmp_action = lsp.cmp_action()
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
-cmp.setup({
+cmp.setuprequire('lsp-zero')({
     sources = {
         { name = 'path' },
         { name = 'nvim_lsp' },

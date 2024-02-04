@@ -13,23 +13,8 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    -- use { 'Carcuis/darcula' }
-    -- use { 'kl4mm/darcula' }
-    -- use { 'doums/darcula' }
     use { "16bonhardd/darcula.nvim", requires = "rktjmp/lush.nvim" }
     use { "mg979/vim-visual-multi", tag = "master" }
-    -- use({
-    -- "folke/trouble.nvim",
-    -- config = function()
-    -- require("trouble").setup {
-    -- icons = false,
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    -- }
-    -- end
-    -- })
-
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
@@ -47,7 +32,7 @@ return require('packer').startup(function(use)
     use("nvim-lua/plenary.nvim")
     use {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
+        branch = 'v3.x',
         requires = {
             -- LSP Support
             { 'neovim/nvim-lspconfig' }, -- Required
@@ -66,7 +51,6 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- use("folke/zen-mode.nvim")
     use("terrortylor/nvim-comment")
     use {
         'saecki/crates.nvim',
@@ -77,6 +61,5 @@ return require('packer').startup(function(use)
             vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         end,
     }
-    -- use { "akinsho/toggleterm.nvim", tag = '*' }
     use { "lewis6991/gitsigns.nvim" }
 end)
